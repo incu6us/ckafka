@@ -1,0 +1,88 @@
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+  - PROJECT_NAME=ckafka
+  - PROJECT_USER=incu6us
+
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - id: ckafka-amd64
+    binary: ckafka
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
+
+  - id: ckafka-darwin-amd64
+    binary: ckafka
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
+
+  - id: ckafka-windows-amd64
+    binary: ckafka
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+release:
+  prerelease: auto
+  github:
+    owner: incu6us
+    name: ckafka
+
+brews:
+  - name: ckafka
+    github:
+      owner: incu6us
+      name: homebrew-tap
+    url_template: "https://github.com/{{ .Env.PROJECT_USER }}/{{ .ProjectName }}/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    commit_author:
+      name: incu6us
+      email: vyacheslavpryimak@gmail.com
+    folder: Formula
+    homepage: "https://github.com/incu6us/ckafka"
+    description: "Kafka producer CLI"
+    test: |
+      system "#{bin}/ckafka -version"
+    install: |
+      bin.install "ckafka"
+
+snapcrafts:
+  - id: ckafka
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      darwin: MacOS
+    publish: true
+    summary: "Kafka producer CLI"
+    description: |
+      Kafka producer CLI
+    grade: stable
+    confinement: strict
+    license: MIT
