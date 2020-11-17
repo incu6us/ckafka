@@ -1,6 +1,5 @@
 env:
   - GO111MODULE=on
-  - CGO_ENABLED=0
   - PROJECT_NAME=ckafka
   - PROJECT_USER=incu6us
 
