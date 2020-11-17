@@ -24,5 +24,5 @@ brew install ckafka
 
 ### Snap
 ```
-snap install --classic ckafka
+snap install ckafka
 ```
