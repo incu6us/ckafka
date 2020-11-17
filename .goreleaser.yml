@@ -67,4 +67,7 @@ snapcrafts:
     grade: stable
     confinement: strict
     license: MIT
-    plugs: ["home", "network", "personal-files"]
+    plugs:
+      personal-files:
+        read:
+          - $HOME/
