@@ -65,11 +65,5 @@ snapcrafts:
     description: |
       Kafka producer CLI
     grade: stable
-    confinement: strict
+    confinement: classic
     license: MIT
-    plugs:
-      personal-files:
-        read:
-          - $HOME/*
-        write:
-          - $HOME/*
