@@ -65,5 +65,5 @@ snapcrafts:
     description: |
       Kafka producer CLI
     grade: stable
-    confinement: classic
+    confinement: strict
     license: MIT
