@@ -17,24 +17,6 @@ builds:
     ldflags:
       - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
 
-#  - id: ckafka-darwin-amd64
-#    binary: ckafka
-#    goos:
-#      - darwin
-#    goarch:
-#      - amd64
-#    ldflags:
-#      - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
-#
-#  - id: ckafka-windows-amd64
-#    binary: ckafka
-#    goos:
-#      - windows
-#    goarch:
-#      - amd64
-#    ldflags:
-#      - -s -w -X "main.Tag={{ .Tag }}" -X "main.Commit={{ .FullCommit }}" -X "main.SourceURL={{ .GitURL }}" -X "main.GoVersion={{ .Env.GO_VERSION }}"
-
 checksum:
   name_template: "checksums.txt"
 
@@ -83,5 +65,5 @@ snapcrafts:
     description: |
       Kafka producer CLI
     grade: stable
-    confinement: strict
+    confinement: classic
     license: MIT
