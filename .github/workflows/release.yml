@@ -23,7 +23,7 @@ jobs:
 
       - name: Set Envs
         run: |
-          echo "::set-env name=GO_VERSION::$(go version | awk '{print $3;}')"
+          echo $(go version | awk '{print $3;}') >> $GO_VERSION
 
       - name: Login to Snapcraft
         uses: samuelmeuli/action-snapcraft@v1
