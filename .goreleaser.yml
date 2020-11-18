@@ -64,7 +64,7 @@ snapcrafts:
     summary: "Kafka producer CLI"
     description: |
       Kafka producer CLI
-    grade: stable
+    grade: devel
     confinement: devmode
     license: MIT
     plugs:
